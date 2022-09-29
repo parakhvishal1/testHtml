@@ -1,0 +1,97 @@
+
+<html>
+    <head>
+        <style>
+            .button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <button type="button" class="button" onclick="showBot()">show bot</button>
+        <button type="button" class="button" onclick="closeBot()"> hide bot </button>
+        <span id="senderId"></span>
+        <span id="unread-count"></span>
+       
+    
+    
+            <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-messaging.js"></script>
+    
+    <script type="text/javascript">
+        window.ymConfig={"bot":"x1655700426047","host":"https://r5.cloud.yellow.ai","payload":{}, version:"branch-staging/v2/version593",ymAuthenticationToken:"qwerty123"};
+      (function () {
+          var w=window,ic=w.YellowMessenger;if("function"===typeof ic)ic("reattach_activator"),ic("update",ymConfig)
+          ;else{var d=document,i=function(){i.c(arguments)};function l(){var e=d.createElement("script");
+          e.type="text/javascript",e.async=!0,e.src="https://cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";var t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}i.q=[],i.c=function(e){i.q.push(e)},w.YellowMessenger=i,w.attachEvent?w.attachEvent("onload",l):w.addEventListener("load",l,!1)}})();
+            (function () {
+                var w = window,
+                    ic = w.YellowMessenger;
+                if ("function" === typeof ic) ic("reattach_activator"), ic("update", ymConfig);
+                else {
+                    var d = document,
+                        i = function () {
+                            i.c(arguments)
+                        };
+                    function l() {
+                        var e = d.createElement("script");
+                        e.type = "text/javascript", e.async = !0, e.src = "https://cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";
+                        var t = d.getElementsByTagName("script")[0];
+                        t.parentNode.insertBefore(e, t)
+                    }
+                    i.q = [], i.c = function (e) {
+                        i.q.push(e)
+                    }, w.YellowMessenger = i, w.attachEvent ? w.attachEvent("onload", l) : w.addEventListener("load", l, !1)
+                }
+            })();
+            let number;
+            let count = 0;
+            window.addEventListener("message",
+                function (e) {
+                    let eventData;
+                    console.log(e, "eventData");
+                    try {
+                        eventData = JSON.parse(e.data)
+                    }
+                    catch (err) {
+                    }
+                    if (eventData.event_code == "ym-bot-closed") {
+                        window.YellowMessengerPlugin.hide()
+                    
+                    else if (eventData.event_code == "ym-bot-opened") {
+                        count = 0;
+                        document.getElementById("unread-count").innerText = 'count---,' + count;
+                        window.YellowMessengerPlugin.show()
+                    }
+                    if (eventData.event_code == "ym-unread-message") {
+                    console.error('test---')
+                    number = count++;
+                    console.error('count---', count);
+                    console.error('number---', count);
+                    document.getElementById("unread-count").innerText = 'count---,' + count;
+                    }
+                },
+                false);
+            function showBot() {
+                window.YellowMessengerPlugin.openBot()
+            }
+            function closeBot() {
+                window.YellowMessengerPlugin.closeBot()
+            }
+            // setTimeout(() => {
+            //     document.getElementById("senderId").innerText = "Sender: " + window.frames.ymIframe.chat.jid.split('@')[0]
+            // }, 5000)
+        </script>
+    </body>
+    </html>
