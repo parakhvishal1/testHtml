@@ -74,7 +74,7 @@
                         document.getElementById("unread-count").innerText = 'count---,' + count;
                         window.YellowMessengerPlugin.show()
                     }
-                    if (eventData.event_code == "ym-unread-message") {
+                    if (eventData.event_code == "ym-unread-message" &&  eventData.event_code != "message-received") {
                     console.error('test---')
                     number = count++;
                     console.error('count---', count);
